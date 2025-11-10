@@ -156,13 +156,11 @@ jobs:
         
       - name: Setup port-forward for tests
         run: |
-          echo "Starting port-forward to ingress on port 80..."
-          kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80 &
+          echo "Starting port-forward to ingress on port 8080..."
+          kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 8080:80 &
           echo $! > /tmp/pf.pid
           sleep 5
-          
-          # Проверяем что работает
-          curl -f http://localhost:80/health
+          curl -f http://localhost:8080/manage/health
 
       - name: Run API Tests
         timeout-minutes: 5
